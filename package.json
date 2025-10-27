@@ -1,0 +1,43 @@
+{
+  "name": "webhook-inspector",
+  "private": true,
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "zod": "^4.1.12",
+      "typescript": "^5.9.3",
+      "tsdown": "^0.15.10"
+    }
+  },
+  "scripts": {
+    "check": "biome check --write .",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @webhook-inspector/db db:push",
+    "db:studio": "turbo -F @webhook-inspector/db db:studio",
+    "db:generate": "turbo -F @webhook-inspector/db db:generate",
+    "db:migrate": "turbo -F @webhook-inspector/db db:migrate",
+    "db:start": "turbo -F @webhook-inspector/db db:start",
+    "db:watch": "turbo -F @webhook-inspector/db db:watch",
+    "db:stop": "turbo -F @webhook-inspector/db db:stop",
+    "db:down": "turbo -F @webhook-inspector/db db:down"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.8",
+    "@biomejs/biome": "^2.3.1",
+    "tsdown": "^0.15.10",
+    "@types/bun": "^1.3.1"
+  },
+  "packageManager": "bun@1.3.1"
+}
