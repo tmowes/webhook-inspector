@@ -47,6 +47,6 @@ app.listen({ port: env.PORT, host: '0.0.0.0' }, (err) => {
     app.log.error(err)
     process.exit(1)
   }
-  console.log(`🔥 HTTP server running on http://localhost:${env.PORT}!`)
+  console.log(`🔥 HTTP server running on http://localhost:${env.PORT}`)
   console.log(`📚 Docs available at http://localhost:${env.PORT}/docs`)
 })
