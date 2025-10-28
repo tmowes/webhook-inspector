@@ -192,8 +192,18 @@
           "fix": "safe",
           "level": "error",
           "options": {
-            "attributes": ["className"],
-            "functions": ["clsx", "cva", "tw", "twMerge", "cn", "twJoin", "tv"]
+            "attributes": [
+              "className"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "tw",
+              "twMerge",
+              "cn",
+              "twJoin",
+              "tv"
+            ]
           }
         },
         "noFloatingPromises": "off",
@@ -260,7 +270,9 @@
           "level": "error",
           "options": {
             "requireAscii": true,
-            "filenameCases": ["kebab-case"],
+            "filenameCases": [
+              "kebab-case"
+            ],
             "match": "[\\-$]?(.+?)[.](.+)"
           }
         },
@@ -443,10 +455,15 @@
   },
   "overrides": [
     {
-      "includes": ["*.config.{js,ts,mjs,mts}"]
+      "includes": [
+        "*.config.{js,ts,mjs,mts}"
+      ]
     },
     {
-      "includes": ["**/*.d.ts", "**/{env,global,types}.d.ts"],
+      "includes": [
+        "**/*.d.ts",
+        "**/{env,global,types}.d.ts"
+      ],
       "linter": {
         "rules": {
           "correctness": {
@@ -475,7 +492,10 @@
       }
     },
     {
-      "includes": ["**/ui/*.tsx", "**/components/ui/*.tsx"],
+      "includes": [
+        "**/ui/*.tsx",
+        "**/components/ui/*.tsx"
+      ],
       "linter": {
         "rules": {
           "performance": {
