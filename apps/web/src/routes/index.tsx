@@ -1,59 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SectionDataTable } from '@/components/section/data-table'
-import { SectionTitle } from '@/components/section/title'
-import { CodeBlock } from '@/components/ui/code-block'
-import { WebhookHeaderDetail } from '@/components/webhook/header-detail'
 
-export const Route = createFileRoute('/')({
-  component: HomeComponent,
-})
+export const Route = createFileRoute('/')({ component: HomeComponent })
 
 function HomeComponent() {
-  const overviewData = [
-    { key: 'Method', value: 'POST' },
-    { key: 'Status Code', value: '200' },
-    { key: 'Content-Type', value: 'application/json' },
-    { key: 'Content-Length', value: '28276 bytes' },
-  ]
-
   return (
-    <div className="h-screen bg-zinc-900">
-      <PanelGroup direction="horizontal">
-        <Panel defaultSize={20} minSize={15} maxSize={40}>
-          <AppSidebar />
-        </Panel>
-        <PanelResizeHandle className="w-px bg-zinc-700 transition-colors duration-150 hover:bg-zinc-600" />
-        <Panel defaultSize={80} minSize={60}>
-          <div className="flex h-full flex-col">
-            <WebhookHeaderDetail />
-            <div className="flex-1 overflow-y-auto">
-              <div className="space-y-6 p-6">
-                <div className="space-y-4">
-                  <SectionTitle>Request Overview</SectionTitle>
-                  <SectionDataTable data={overviewData} />
-                </div>
-
-                <div className="space-y-4">
-                  <SectionTitle>Query Parameters</SectionTitle>
-                  <SectionDataTable data={overviewData} />
-                </div>
-
-                <div className="space-y-4">
-                  <SectionTitle>Headers</SectionTitle>
-                  <SectionDataTable data={overviewData} />
-                </div>
-
-                <div className="space-y-4">
-                  <SectionTitle>Request Body</SectionTitle>
-                  <CodeBlock code={JSON.stringify(overviewData, null, 2)} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </Panel>
-      </PanelGroup>
+    <div className="flex h-full items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-2 p-8 text-center">
+        <h3 className='font-semibold text-lg text-zinc-200'>No webhook selected</h3>
+        <p className='max-w-md text-sm text-zinc-400'>
+          Select a webhook from the list to view its details
+        </p>
+      </div>
     </div>
+
   )
 }
