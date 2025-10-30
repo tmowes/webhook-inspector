@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.vscode": true,
+    "**/.turbo": true,
+    "**/.tanstack": true,
+    "**/.git": true,
+    "**/.DS_Store": true
+  }
+}

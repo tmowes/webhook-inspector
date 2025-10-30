@@ -1,4 +1,4 @@
-import { desc, lt } from 'drizzle-orm'
+import { desc, eq, type InferInsertModel, lt } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { createSelectSchema } from 'drizzle-zod'
 
@@ -25,4 +25,33 @@ export async function listWebhooksByCursor(limit: number, cursor?: string) {
     .where(cursor ? lt(webhooks.id, cursor) : undefined)
     .orderBy(desc(webhooks.id))
     .limit(limit + 1)
+}
+
+export async function getWebhookById(id: string) {
+  const [result] = await db.select().from(webhooks).where(eq(webhooks.id, id)).limit(1)
+  return result || null
+}
+
+export async function deleteWebhookById(id: string) {
+  const [result] = await db.delete(webhooks).where(eq(webhooks.id, id)).returning()
+  return result || null
+}
+
+export async function captureRequest(data: InferInsertModel<typeof webhooks>) {
+  const { method, ip, contentType, contentLength, body, headers, pathname } = data
+
+  const [result] = await db
+    .insert(webhooks)
+    .values({
+      method,
+      ip,
+      contentType,
+      contentLength,
+      body,
+      headers,
+      pathname,
+    })
+    .returning()
+
+  return result || null
 }

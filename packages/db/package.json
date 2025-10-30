@@ -17,6 +17,7 @@
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:seed": "bun run src/seed.ts",
     "db:start": "docker compose up -d",
     "db:watch": "docker compose up",
     "db:stop": "docker compose stop",
@@ -30,8 +31,9 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.5",
-    "@types/pg": "^8.15.5",
+    "@faker-js/faker": "10.1.0",
+    "drizzle-kit": "^0.31.6",
+    "@types/pg": "^8.15.6",
     "tsdown": "catalog:"
   },
   "peerDependencies": {

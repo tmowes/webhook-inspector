@@ -10,6 +10,9 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './env'
+import { captureWebhook } from './routes/webhooks/capture-requests'
+import { deleteWebhook } from './routes/webhooks/delete-by-id'
+import { getWebhook } from './routes/webhooks/get-by-id'
 import { listWebhooks } from './routes/webhooks/list'
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
@@ -37,6 +40,9 @@ app.register(fastifySwagger, {
 app.register(ScalarApiReference, { routePrefix: '/docs' })
 
 app.register(listWebhooks)
+app.register(getWebhook)
+app.register(deleteWebhook)
+app.register(captureWebhook)
 
 app.get('/health', async () => {
   return 'OK'
