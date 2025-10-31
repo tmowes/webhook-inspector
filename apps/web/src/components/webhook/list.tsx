@@ -1,8 +1,9 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { webhookListSchema } from '@/http/schemas/webhooks'
+import { Button } from '../ui/button'
 import { WebhooksListItem } from './list-item'
 
 export function WebhooksList() {
@@ -27,6 +28,17 @@ export function WebhooksList() {
   })
 
   const webhooks = data.pages.flatMap((page) => page.webhooks)
+
+  const [isCheckedIds, setIsCheckedIds] = useState<string[]>([])
+
+  function onWebhookChecked(id: string, checked: boolean) {
+    setIsCheckedIds((prev) => {
+      if (checked) {
+        return [...prev, id]
+      }
+      return prev.filter((checkedId) => checkedId !== id)
+    })
+  }
 
   useEffect(() => {
     if (observerRef.current) {
@@ -58,11 +70,23 @@ export function WebhooksList() {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="space-y-1 p-2">
-        {webhooks.map((webhook) => {
-          return <WebhooksListItem key={webhook.id} webhook={webhook} />
-        })}
+    <div className="relative">
+      <div className="absolute top-0 right-0 left-0 z-40 flex h-12 items-center border-zinc-700 border-b bg-zinc-800/30 backdrop-blur-sm">
+        <Button className="mx-auto">Gerar orquestrador</Button>
+      </div>
+      <div className="relative flex-1 overflow-y-auto">
+        <div className="space-y-1 p-2 pt-16">
+          {webhooks.map((webhook) => {
+            return (
+              <WebhooksListItem
+                key={webhook.id}
+                webhook={webhook}
+                onWebhookChecked={onWebhookChecked}
+                checked={isCheckedIds.includes(webhook.id)}
+              />
+            )
+          })}
+        </div>
         {hasNextPage && (
           <div className="p-2" ref={loadMoreRef}>
             {isFetchingNextPage && (
