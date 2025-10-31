@@ -1,4 +1,4 @@
-import { desc, eq, type InferInsertModel, lt } from 'drizzle-orm'
+import { desc, eq, type InferInsertModel, inArray, lt } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { createSelectSchema } from 'drizzle-zod'
 
@@ -54,4 +54,13 @@ export async function captureRequest(data: InferInsertModel<typeof webhooks>) {
     .returning()
 
   return result || null
+}
+
+export async function getWebhooksByIds(webhookIds: string[]) {
+  const result = await db
+    .select({ body: webhooks.body })
+    .from(webhooks)
+    .where(inArray(webhooks.id, webhookIds))
+
+  return result
 }

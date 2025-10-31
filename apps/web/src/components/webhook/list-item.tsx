@@ -14,12 +14,12 @@ type WebhookListItemProps = {
     pathname: string
     createdAt: Date
   }
-  onWebhookChecked?: (id: string, checked: boolean) => void
-  checked?: boolean
+  onCheckedChange: (id: string) => void
+  isChecked: boolean
 }
 
 export function WebhooksListItem(props: WebhookListItemProps) {
-  const { webhook, onWebhookChecked, checked } = props
+  const { webhook, onCheckedChange, isChecked } = props
   const { id, method, pathname, createdAt } = webhook
   const queryClient = useQueryClient()
 
@@ -36,8 +36,8 @@ export function WebhooksListItem(props: WebhookListItemProps) {
     <div className="group rounded-lg transition-colors duration-150 hover:bg-zinc-700/30">
       <div className="flex items-start gap-3 px-4 py-2.5">
         <CustomCheckbox
-          onCheckedChange={() => onWebhookChecked?.(id, !checked)}
-          checked={checked}
+          onCheckedChange={() => onCheckedChange(id)}
+          checked={isChecked}
         />
         <Link to="/webhooks/$id" params={{ id }} className="flex min-w-0 flex-1 items-start gap-3">
           <span className="w-12 shrink-0 text-right font-mono font-semibold text-xs text-zinc-300">

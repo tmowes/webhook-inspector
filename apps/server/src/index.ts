@@ -12,6 +12,7 @@ import {
 import { env } from './env'
 import { captureWebhook } from './routes/webhooks/capture-requests'
 import { deleteWebhook } from './routes/webhooks/delete-by-id'
+import { generateHandler } from './routes/webhooks/generate-handler'
 import { getWebhook } from './routes/webhooks/get-by-id'
 import { listWebhooks } from './routes/webhooks/list'
 
@@ -43,6 +44,7 @@ app.register(listWebhooks)
 app.register(getWebhook)
 app.register(deleteWebhook)
 app.register(captureWebhook)
+app.register(generateHandler)
 
 app.get('/health', async () => {
   return 'OK'
